@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="it">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#173c42"><meta name="description" content="Costruisci le tue tavole di Abell. Clienti, funzioni e modalità in un editor semplice, con esportazione Word."><title>Tavole di Abell — Il tuo spazio di lavoro</title><link rel="stylesheet" href="style.css"><link rel="icon" href="icon.svg" type="image/svg+xml"></head>
+<body>
+<header class="topbar"><a class="brand" href="./" aria-label="Tavole di Abell"><img src="icon.svg" alt="" width="36" height="36"><span>Tavole di <strong>Abell</strong></span></a><div class="topactions"><span class="save-state" id="save-state"><span></span>Salvato nel browser</span><button class="button quiet" id="project-button">Progetto</button><button class="button primary" id="export-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>Esporta in Word</button></div></header>
+<div class="workspace">
+<aside class="sidebar" aria-label="Editor della tavola">
+ <div class="sidebar-intro"><div class="eyebrow">IL TUO PROGETTO</div><div class="pick-row"><select id="plate-picker" aria-label="Tavola corrente"></select><button class="square" id="new-plate" title="Crea una nuova tavola" aria-label="Crea una nuova tavola">+</button></div></div>
+ <div class="name-fields"><label for="plate-title">Nome del business</label><input id="plate-title" maxlength="120" placeholder="Scrivi il nome del business"><label for="plate-subtitle">Sottotitolo <span>facoltativo</span></label><input id="plate-subtitle" maxlength="140" placeholder="Es. mercato o area geografica"></div>
+ <div class="dimensions-head"><h2>Le tre dimensioni</h2><span>01 — 03</span></div>
+ <div class="tabs" role="tablist" aria-label="Dimensioni di Abell"></div>
+ <section id="dimension-panel" role="tabpanel" class="dimension-panel"></section>
+ <details class="section" id="cubes-section"><summary><span><span class="section-symbol">◇</span>Cubi</span><span id="cube-summary" class="summary-note">Solo il più esterno</span></summary><div class="section-body" id="cubes-panel"></div></details>
+ <details class="section" id="options-section"><summary><span><span class="section-symbol">＋</span>Dati facoltativi</span><span class="summary-note" id="option-summary">Disattivati</span></summary><div class="section-body" id="options-panel"></div></details>
+ <details class="section" id="legend-section"><summary><span><span class="section-symbol">≡</span>Legenda</span><span class="summary-note" id="legend-summary">Non visibile</span></summary><div class="section-body"><label for="legend">Testo della legenda</label><textarea id="legend" rows="3" maxlength="1000" placeholder="Scrivi qui solo se vuoi aggiungere una legenda"></textarea><p class="hint">Se lasci questo campo vuoto, la legenda non compare.</p></div></details>
+ <div class="sidebar-foot"><span class="small-cube">◇</span> Tre dimensioni. Una visione d’insieme.</div>
+</aside>
+<main class="canvas-area">
+ <div class="canvas-heading"><div><div class="eyebrow">SPAZIO DI LAVORO</div><h1>La tua tavola</h1></div><span class="live-pill"><span></span>Anteprima in tempo reale</span></div>
+ <div class="canvas-toolbar"><div class="mode-control" role="group" aria-label="Interazione con il disegno"><button data-mode="move" aria-pressed="true">Sposta etichette</button><button data-mode="sort" aria-pressed="false">Ordina sugli assi</button><button data-mode="select" aria-pressed="false">Seleziona cubi</button></div><button id="reset-layout" class="text-button">Ripristina posizioni</button></div>
+ <div class="paper-scroll" id="paper-scroll"><div class="paper" id="paper"><svg id="drawing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1060" role="group" aria-label="Tavola di Abell con clienti, funzioni e modalità"></svg></div></div>
+ <div class="canvas-bottom"><p id="canvas-help">Trascina le etichette per sistemarle sul foglio.</p><div class="zoom"><button id="zoom-out" aria-label="Riduci zoom">−</button><button id="zoom-reset" aria-label="Adatta la tavola">100%</button><button id="zoom-in" aria-label="Aumenta zoom">+</button></div></div>
+ <div class="guide"><div class="guide-icon">↗</div><p><strong>Parti dalle tre dimensioni.</strong> Aggiungi e ordina le voci nelle schede. Il disegno si aggiorna mentre lavori.</p><span id="dimensions-count">3 clienti · 3 funzioni · 1 modalità</span></div>
+</main>
+</div>
+<dialog id="project-dialog"><form method="dialog" class="dialog-heading"><h2>Il tuo progetto</h2><button class="square" aria-label="Chiudi">×</button></form><p class="hint">Le tavole si salvano in questo browser. Scarica il progetto per conservarne una copia o aprirlo su un altro dispositivo.</p><div class="dialog-actions"><button class="button" id="save-project">Scarica progetto</button><button class="button" id="open-project">Importa progetto</button><button class="button" id="duplicate-plate">Duplica questa tavola</button><button class="button" id="export-all">Tutte le tavole in Word</button><button class="button danger" id="delete-plate">Elimina questa tavola</button></div><input type="file" id="project-file" accept=".json,application/json" hidden></dialog>
+<dialog id="confirm-dialog"><h2 id="confirm-title"></h2><p id="confirm-message"></p><div class="confirm-actions"><button class="button" id="confirm-cancel">Annulla</button><button class="button primary" id="confirm-yes">Conferma</button></div></dialog>
+<div id="toast" role="status" hidden></div>
+<script src="jszip.min.js"></script><script src="model.js"></script><script src="word.js"></script><script src="app.js"></script>
+</body></html>
